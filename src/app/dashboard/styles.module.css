@@ -46,3 +46,71 @@
   padding: 12px 0;
   font-size: 18px;
 }
+
+.taskContainer {
+  margin: 34px auto 0 auto;
+  width: 100%;
+  max-width: 1024px;
+  padding: 0 18px;
+  display: flex;
+  flex-direction: column;
+}
+
+.taskContainer a {
+  text-decoration: none;
+  color: #0f0f0f;
+}
+
+.taskContainer h1 {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 14px;
+}
+
+.task {
+  margin-bottom: 14px;
+  line-height: 150%;
+  display: flex;
+  flex-direction: column;
+  border: 1.5px solid #909090;
+  border-radius: 5px;
+  padding: 14px;
+}
+
+.tagContainer {
+  display: flex;
+  align-items: center;
+
+  margin-bottom: 8px;
+}
+
+.tag {
+  background-color: #3183ff;
+  padding: 2px 6px;
+  color: #fff;
+  border-radius: 5px;
+  font-size: 12px;
+}
+
+.shareButton {
+  background: transparent;
+  border: none;
+  margin: 0 8px;
+}
+
+.taskContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* o pre-wrap respeita as quebras de linha colocadas pelo usuario no momento da digitacao */
+.taskContent p {
+  white-space: pre-wrap;
+}
+
+.trashButton {
+  background: transparent;
+  border: none;
+  margin: 0 8px;
+}
