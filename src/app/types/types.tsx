@@ -8,9 +8,8 @@ export interface TaskProps {
   user: string;
 }
 
-// export interface SnapshotTaskData extends DocumentData {
-//   created: Date;
-//   public: boolean;
-//   tarefa: string;
-//   user: string;
-// }
+export type TaskType =
+  | (Omit<TaskProps, "created"> & {
+      created: string;
+    })
+  | undefined;
