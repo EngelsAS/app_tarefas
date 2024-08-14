@@ -9,12 +9,14 @@ import {
   where,
   getDoc,
   DocumentData,
+  getDocs,
 } from "firebase/firestore";
 import { redirect } from "next/navigation";
-import { TaskType, TaskProps } from "@/app/types/types";
+import { TaskType, TaskProps, CommentProps } from "@/app/types/types";
 import TextArea from "@/components/TextArea";
 import Form from "./components/form";
 import { getAuthSession } from "@/app/lib/auth";
+import Comments from "./components/comments";
 
 export const metadata: Metadata = {
   title: "Detalhes da tarefa",
@@ -38,6 +40,26 @@ const createTaskObject = (data: DocumentData | undefined, taskId: string) => {
   };
 };
 
+const getAllComments = async (taskId: string) => {
+  const q = query(collection(db, "comments"), where("taskId", "==", taskId));
+
+  const snapshotComments = await getDocs(q);
+
+  let allComents: CommentProps[] = [];
+
+  snapshotComments.forEach((doc) => {
+    allComents.push({
+      id: doc.id,
+      comment: doc.data().comment,
+      user: doc.data().user,
+      name: doc.data().name,
+      taskId: doc.data().taskID,
+    });
+  });
+
+  return allComents;
+};
+
 const getSnapshotData = async (taskId: string) => {
   const docRef = doc(db, "tarefas", taskId);
   const snapshot = await getDoc(docRef);
@@ -49,6 +71,7 @@ const Task = async ({ params }: { params: { id: string } }) => {
   handleRedirect(data);
 
   const task = createTaskObject(data, params.id) as TaskType;
+  const comments = await getAllComments(params.id);
 
   const session = await getAuthSession();
 
@@ -61,11 +84,8 @@ const Task = async ({ params }: { params: { id: string } }) => {
         </article>
       </main>
 
-      <section className={styles.commentsContainer}>
-        <h2>Deixar comentário</h2>
-
-        <Form session={session} taskId={params.id} />
-      </section>
+      <Form session={session} taskId={params.id} />
+      <Comments comments={comments} />
     </div>
   );
 };

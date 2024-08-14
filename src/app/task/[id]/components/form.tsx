@@ -36,22 +36,26 @@ const Form = ({ session, taskId }: FormProps) => {
   };
 
   return (
-    <form onSubmit={handleSendComment}>
-      <TextArea
-        value={input}
-        onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
-          setInput(e.target.value)
-        }
-        placeholder="Digite seu comentário"
-      />
-      <button
-        type="submit"
-        disabled={!session?.user}
-        className={styles.commentButton}
-      >
-        Enviar comentário
-      </button>
-    </form>
+    <section className={styles.commentsContainer}>
+      <h2>Deixar comentário</h2>
+
+      <form onSubmit={handleSendComment}>
+        <TextArea
+          value={input}
+          onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
+            setInput(e.target.value)
+          }
+          placeholder="Digite seu comentário"
+        />
+        <button
+          type="submit"
+          disabled={!session?.user}
+          className={styles.commentButton}
+        >
+          Enviar comentário
+        </button>
+      </form>
+    </section>
   );
 };
 

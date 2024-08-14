@@ -13,3 +13,11 @@ export type TaskType =
       created: string;
     })
   | undefined;
+
+export interface CommentProps {
+  id: string;
+  comment: string;
+  taskId: string;
+  user: string;
+  name: string;
+}
