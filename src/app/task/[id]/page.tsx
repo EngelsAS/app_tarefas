@@ -14,9 +14,8 @@ import {
 import { redirect } from "next/navigation";
 import { TaskType, TaskProps, CommentProps } from "@/app/types/types";
 import TextArea from "@/components/TextArea";
-import Form from "./components/form";
 import { getAuthSession } from "@/app/lib/auth";
-import Comments from "./components/comments";
+import CommentsSection from "./components/commentsSections";
 
 export const metadata: Metadata = {
   title: "Detalhes da tarefa",
@@ -84,8 +83,11 @@ const Task = async ({ params }: { params: { id: string } }) => {
         </article>
       </main>
 
-      <Form session={session} taskId={params.id} />
-      <Comments comments={comments} />
+      <CommentsSection
+        comments={comments}
+        session={session}
+        taskId={params.id}
+      />
     </div>
   );
 };
