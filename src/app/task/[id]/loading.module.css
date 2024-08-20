@@ -1,0 +1,45 @@
+.container {
+  width: 100%;
+  max-width: 1024px;
+  margin: 40px auto 0 auto;
+  padding: 0 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.main {
+  width: 100%;
+}
+
+.main > div:first-child {
+  margin-bottom: 14px;
+}
+
+.form_title {
+  margin-top: 76px;
+}
+
+.form_box {
+  height: 158px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.form_button {
+  margin-top: 5px;
+  margin-bottom: 55px;
+  height: 40px;
+  min-width: 100%;
+}
+
+.task_box {
+  height: 90px;
+  margin-top: 20px;
+}
+
+.comment_box {
+  margin-top: 20px;
+  height: 88px;
+}

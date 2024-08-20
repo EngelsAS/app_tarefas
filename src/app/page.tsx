@@ -1,8 +1,28 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 import HeroImage from "../../public/assets/hero.png";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "@/services/firebaseConnection";
 
-export default function Home() {
+async function getNumberOfCommentsAndTasks() {
+  const commentsRef = collection(db, "comments");
+  const tasksRef = collection(db, "tarefas");
+
+  const commentsSnapshot = await getDocs(commentsRef);
+  const tasksSnapshot = await getDocs(tasksRef);
+
+  const numberOfComments = commentsSnapshot.size || 0;
+  const numberOfTasks = tasksSnapshot.size || 0;
+
+  return {
+    comments: numberOfComments,
+    tasks: numberOfTasks,
+  };
+}
+
+export default async function Home() {
+  const { comments, tasks } = await getNumberOfCommentsAndTasks();
+
   return (
     <div className={styles.container}>
       <main className={styles.main}>
@@ -17,14 +37,16 @@ export default function Home() {
         </h1>
         <div className={styles.infos}>
           <div className={styles.infoBox}>
-            <span>+12 post</span>
+            <span>+{tasks} post</span>
           </div>
 
           <div className={styles.infoBox}>
-            <span>+90 comentários</span>
+            <span>+{comments} comentários</span>
           </div>
         </div>
       </main>
     </div>
   );
 }
+
+export const revalidate = 60;
